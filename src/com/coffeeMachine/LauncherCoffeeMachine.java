@@ -47,7 +47,6 @@ private Order order;
 			repeatMenu=false;
 		}
 		
-		
 	}
 	
 
@@ -70,9 +69,14 @@ private Order order;
 		
 	}
 	
-	public static void drinkMakerProtocol()
+	public static String drinkMakerProtocol(Order order)
 	{
-		
+		String message = null;
+		if(order.getMessage()!=null)
+		{
+			 message=order.getMessage();
+		}
+		return message;
 	}
 	
 	

@@ -32,5 +32,13 @@ class LauncherCoffeeMachineTest {
 		Order orderExpect=LauncherCoffeeMachine.makeOrder("Bonjour le monde");
 		assertTrue(orderWaitMessage.getMessage().contains(orderExpect.getMessage()));
 	}
+	
+	@Test
+	void testdrinkMakerProtocol()
+	{
+		String messageWait=LauncherCoffeeMachine.drinkMakerProtocol(new Order("M:hello the world"));
+		String messageExcepted="M:hello the world";
+		messageExcepted.contains(messageWait);
+	}
 
 }
