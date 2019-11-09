@@ -15,7 +15,7 @@ class OrderTest {
 
 	@Test
 	void testOrderStringStringString() {
-		Order orderCustomerTest=new Order("T","0","0","");
+		Order orderCustomerTest=new Order("T","0","0");
 		assertTrue(orderCustomerTest.getDrink().contains("T"));
 		assertTrue(orderCustomerTest.getNumberSugar().contains("0"));
 		assertTrue(orderCustomerTest.getStick().contains("0"));

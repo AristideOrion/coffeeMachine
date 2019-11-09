@@ -12,19 +12,19 @@ private Order order;
 	}
 	
 	static void showMenu()
+
 	{
 		Boolean repeatMenu=true;
 		while(repeatMenu) {
 		Scanner scan=new Scanner(System.in);
 		System.out.println("Bienvennue que désirez vous boire ?");
-		System.out.println("Veuillez tapez 1 pour le coffee, 2 pour le thé, 3 pour le chocolat,4 pour  écrire un message");
-		int choixDrink=scan.nextInt();
-		scan.nextLine();
-		if(choixDrink!=1 && choixDrink!=2 && choixDrink!=3 && choixDrink!=4)
+		System.out.println("Veuillez tapez C pour le coffee, T pour le tea, H pour le chocolate, M pour  écrire un message");
+		String choix=scan.nextLine();
+		if(!choix.contains("C") && !choix.contains("T") && !choix.contains("H") && !choix.contains("M"))
 		{
 			System.out.println("Veuillez reprendre svp, l'instruction saisie ne correspond pas");
 		}
-		if(choixDrink==4)
+		if(choix.contains("M"))
 		{
 			System.out.println("Veuillez saisir votre message");
 			Scanner scanMess=new Scanner(System.in);
@@ -33,10 +33,10 @@ private Order order;
 			
 			
 		}
-		if(choixDrink==1 ||choixDrink==2||choixDrink==3)
+		if(choix.contains("C") ||choix.contains("T")||choix.contains("H"))
 		{
 			System.out.println("Veuillez tapez la quantité de sucre que vous désirez");
-			int choixSucre =scan.nextInt();
+			Integer choixSucre =scan.nextInt();
 			
 		}
 		
@@ -49,6 +49,31 @@ private Order order;
 		
 		
 	}
+	
 
+   }
+	 public static Order makeOrder(String drink,Integer sugar)
+	{	Order orderCustomer=new Order();
+		orderCustomer.setDrink(drink);
+		orderCustomer.setNumberSugar(sugar.toString());
+		if(sugar!=0)
+		{
+			orderCustomer.setStick("stick");
+		}
+		return orderCustomer;
 	}
+	public static Order makeOrder(String message)
+	{
+		Order orderForShowMessage=new Order();
+		orderForShowMessage.setMessage("M:"+message);
+		return orderForShowMessage;
+		
+	}
+	
+	public static void drinkMakerProtocol()
+	{
+		
+	}
+	
+	
 }

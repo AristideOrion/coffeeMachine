@@ -10,13 +10,19 @@ private String message;
 	{
 	
 	}
-	public Order(String drink, String numberSugar, String stick,String message) 
+	
+	public Order(String message) 
+	{
+	super();
+	this.message=message;
+	}
+	
+	public Order(String drink, String numberSugar, String stick) 
 	{
 	super();
 	this.drink = drink;
 	this.numberSugar = numberSugar;
 	this.stick = stick;
-	this.message=message;
 	}
 	
 
@@ -24,7 +30,7 @@ private String message;
 		return drink;
 	}
 
-	private void setDrink(String drink) {
+	public void setDrink(String drink) {
 		this.drink = drink;
 	}
 
@@ -32,21 +38,21 @@ private String message;
 		return numberSugar;
 	}
 
-	private void setNumberSugar(String numberSugar) {
+	public void setNumberSugar(String numberSugar) {
 		this.numberSugar = numberSugar;
 	}
 
 	public String getMessage() {
 		return message;
 	}
-	private void setMessage(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 	public String getStick() {
 		return stick;
 	}
 
-	private void setStick(String stick) {
+	public void setStick(String stick) {
 		this.stick = stick;
 	}
 	
