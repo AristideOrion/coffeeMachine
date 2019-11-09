@@ -1,10 +1,7 @@
 package com.coffeeMachine.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.Console;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +54,23 @@ class LauncherCoffeeMachineTest {
 	@Test
 	void testshowCommandCustomer()
 	{
-		fail("implement yet");
+		LauncherCoffeeMachine.showCommandCustomer("T:2:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 tea with 2 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("T:1:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 tea with 1 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("T::" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 tea with no sugar and therefore  no stick"));
+		LauncherCoffeeMachine.showCommandCustomer("C:2:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 coffee with 2 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("C:1:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 coffee with 1 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("C::" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 coffee with no sugar and therefore  no stick"));
+		LauncherCoffeeMachine.showCommandCustomer("H:2:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 Chocolate with 2 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("H:1:0" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 Chocolate with 1 sugar and a stick"));
+		LauncherCoffeeMachine.showCommandCustomer("H::" );
+		assertTrue(LauncherCoffeeMachine.output.contains("Drink maker makes 1 Chocolate with no sugar and therefore  no stick"));
 	}
-
 }
