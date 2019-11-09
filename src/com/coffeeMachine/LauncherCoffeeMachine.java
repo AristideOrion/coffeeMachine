@@ -28,8 +28,8 @@ private Order order;
 		{
 			System.out.println("Veuillez saisir votre message");
 			Scanner scanMess=new Scanner(System.in);
-			String messageToAffiche=scanMess.next();
-			scanMess.nextLine();
+			String messageToAffiche=scanMess.nextLine();
+			showCommandCustomer(drinkMakerProtocol(makeOrder(messageToAffiche)));
 			
 			
 		}
@@ -37,11 +37,18 @@ private Order order;
 		{
 			System.out.println("Veuillez tapez la quantité de sucre que vous désirez");
 			Integer choixSucre =scan.nextInt();
-			
+			showCommandCustomer(drinkMakerProtocol(makeOrder(choix,choixSucre)));
 		}
 		
 		System.out.println("Désirez vous reprendre votre commande? si oui tapez 1 sinon tapez 2");
-		int i=scan.nextInt();
+		int i = 0;
+		try{
+			 i=scan.nextInt();
+		}catch(Exception e)
+		{
+			System.out.println("Erreur dans la saisie"+e.getMessage());
+		}
+		
 		if(i!=1)
 		{
 			repeatMenu=false;
@@ -57,14 +64,14 @@ private Order order;
 		orderCustomer.setNumberSugar(sugar.toString());
 		if(sugar!=0)
 		{
-			orderCustomer.setStick("stick");
+			orderCustomer.setStick("0");
 		}
 		return orderCustomer;
 	}
 	public static Order makeOrder(String message)
 	{
 		Order orderForShowMessage=new Order();
-		orderForShowMessage.setMessage("M:"+message);
+		orderForShowMessage.setMessage(message);
 		return orderForShowMessage;
 		
 	}
@@ -74,9 +81,64 @@ private Order order;
 		String message = null;
 		if(order.getMessage()!=null)
 		{
-			 message=order.getMessage();
+			 message=order.getInstructionForWithMessageForDrinkMaker();
+			 return message;
+		}
+		if(order.getStick()!=null)
+		{
+			message=order.getInstructionForWithSugarStickDrinkMaker();
+			return message;
+		}
+		if(order.getNumberSugar().contentEquals("0"))
+		{
+			message=order.getInstructionForWithoutSugarDrinkMaker();
+			return message;
 		}
 		return message;
+	}
+	
+	public static void showCommandCustomer(String messageProtocol)
+	{
+		if(messageProtocol.contains("M:"))
+		{
+			System.out.println(messageProtocol);
+		}
+		if(messageProtocol.contains("T:1:0"))
+		{
+			System.out.println("Drink maker makes 1 tea with 1 sugar and a stick");
+		}
+		if(messageProtocol.contains("T:2:0"))
+		{
+			System.out.println("Drink maker makes 1 tea with 2 sugar and a stick");
+		}
+		if(messageProtocol.contains("T::"))
+		{
+			System.out.println("Drink maker makes 1 tea with no sugar and therefore  no stick");
+		}
+		if(messageProtocol.contains("C:1:0"))
+		{
+			System.out.println("Drink maker makes 1 coffee with 1 sugar and a stick");
+		}
+		if(messageProtocol.contains("C:2:0"))
+		{
+			System.out.println("Drink maker makes 1 coffee with 2 sugar and a stick");
+		}
+		if(messageProtocol.contains("C::"))
+		{
+			System.out.println("Drink maker makes 1 coffee with no sugar and therefore  no stick");
+		}
+		if(messageProtocol.contains("H:1:0"))
+		{
+			System.out.println("Drink maker makes 1 Chocoloate with 1 sugar and a stick");
+		}
+		if(messageProtocol.contains("H:2:0"))
+		{
+			System.out.println("Drink maker makes 1 Chocoloate with 2 sugar and a stick");
+		}
+		if(messageProtocol.contains("H::"))
+		{
+			System.out.println("Drink maker makes 1 Chocoloate with no sugar and therefore  no stick");
+		}
 	}
 	
 	

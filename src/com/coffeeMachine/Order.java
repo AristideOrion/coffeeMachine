@@ -55,6 +55,22 @@ private String message;
 	public void setStick(String stick) {
 		this.stick = stick;
 	}
+	public String getInstructionForWithSugarStickDrinkMaker()
+	{
+		return this.getDrink()+":"+this.getNumberSugar()+":"+this.getStick();
+		
+	}
+	public String getInstructionForWithMessageForDrinkMaker()
+	{
+		return "M:"+this.message;
+	}
+	
+	public String getInstructionForWithoutSugarDrinkMaker()
+	{
+		return this.getDrink()+"::";
+		
+	}
+	
 	
 	
 }
