@@ -1,11 +1,11 @@
 package com.coffeeMachine;
 
 public class Order {
-private String drink;
+private Drink drink;
 private String numberSugar;
 private String stick;
 private String message;
-
+	
 	public Order() 
 	{
 	
@@ -17,7 +17,7 @@ private String message;
 	this.message=message;
 	}
 	
-	public Order(String drink, String numberSugar, String stick) 
+	public Order(Drink drink, String numberSugar, String stick) 
 	{
 	super();
 	this.drink = drink;
@@ -26,11 +26,11 @@ private String message;
 	}
 	
 
-	public String getDrink() {
+	public Drink getDrink() {
 		return drink;
 	}
 
-	public void setDrink(String drink) {
+	public void setDrink(Drink drink) {
 		this.drink = drink;
 	}
 
@@ -57,7 +57,7 @@ private String message;
 	}
 	public String getInstructionForWithSugarStickDrinkMaker()
 	{
-		return this.getDrink()+":"+this.getNumberSugar()+":"+this.getStick();
+		return this.getDrink().toString()+":"+this.getNumberSugar()+":"+this.getStick();
 		
 	}
 	public String getInstructionForWithMessageForDrinkMaker()
@@ -67,7 +67,7 @@ private String message;
 	
 	public String getInstructionForWithoutSugarDrinkMaker()
 	{
-		return this.getDrink()+"::";
+		return this.getDrink().toString()+"::";
 		
 	}
 	

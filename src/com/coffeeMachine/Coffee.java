@@ -5,11 +5,12 @@ public class Coffee extends Drink {
 	
 	public  Coffee()
 	{
-		
+		this.setPrice();
+		this.setCodeMachine();
 	}
 	@Override
 	protected void setPrice() {
-		this.price=0.4;
+		this.price=0.6;
 
 	}
 
@@ -26,7 +27,7 @@ public class Coffee extends Drink {
 
 	@Override
 	public String getCodeMachine() {
-		return this.getCodeMachine();
+		return this.codeMachine;
 	}
 
 }

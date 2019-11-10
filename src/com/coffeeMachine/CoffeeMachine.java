@@ -2,16 +2,17 @@ package com.coffeeMachine;
 
 import java.util.Scanner;
 
-public class LauncherCoffeeMachine {
+public class CoffeeMachine {
 
 	
+	private static final String MESSAGECUSTOMER = "M";
+	private static final String CHOCOLAT = "H";
+	private static final String TEA = "T";
+	private static final String COFFEE = "C";
 	public static String output;
-	public static void main(String[] args) {
-		
-		showMenu();
-	}
 	
-	static void showMenu()
+	
+	public static void showMenu()
 
 	{
 		Boolean repeatMenu=true;
@@ -21,25 +22,29 @@ public class LauncherCoffeeMachine {
 		System.out.println("Veuillez tapez C pour le coffee, T pour le tea, H pour le chocolate, M pour  écrire un message");
 		String choix=scan.nextLine();
 		scan.close();
-		if(!choix.contains("C") && !choix.contains("T") && !choix.contains("H") && !choix.contains("M"))
+		if(!choix.contains(COFFEE) && !choix.contains(TEA) && !choix.contains(CHOCOLAT) && !choix.contains(MESSAGECUSTOMER))
 		{
 			System.out.println("Veuillez reprendre svp, l'instruction saisie ne correspond pas");
 		}
-		if(choix.contains("M"))
+		if(choix.contains(MESSAGECUSTOMER))
 		{
 			System.out.println("Veuillez saisir votre message");
 			Scanner scanMess=new Scanner(System.in);
 			String messageToAffiche=scanMess.nextLine();
 			scanMess.close();
-			showCommandCustomer(drinkMakerProtocol(makeOrder(messageToAffiche)) );
+			drinkMaker(drinkMakerProtocol(makeOrder(messageToAffiche)) );
 			
 			
 		}
-		if(choix.contains("C") ||choix.contains("T")||choix.contains("H"))
+		if(choix.contains(COFFEE) ||choix.contains(TEA)||choix.contains(CHOCOLAT))
 		{
 			System.out.println("Veuillez tapez la quantité de sucre que vous désirez");
 			Integer choixSucre =scan.nextInt();
-			showCommandCustomer(drinkMakerProtocol(makeOrder(choix,choixSucre)));
+			scan.nextLine();
+			System.out.println("Veuillez tapez le montant de votre boisson. Tea :0.4euros, Coffee : 0.6euros, Chocolate: 0.5euros");
+			Double amountDrink=scan.nextDouble();
+			
+			drinkMaker(drinkMakerProtocol(makeOrder(choix,choixSucre)));
 		}
 		
 		System.out.println("Désirez vous reprendre votre commande? si oui tapez 1 sinon tapez 2");
@@ -60,15 +65,40 @@ public class LauncherCoffeeMachine {
 	
 
    }
-	 public static Order makeOrder(String drink,Integer sugar)
-	{	Order orderCustomer=new Order();
-		orderCustomer.setDrink(drink);
-		orderCustomer.setNumberSugar(sugar.toString());
-		if(sugar!=0)
-		{
-			orderCustomer.setStick("0");
-		}
+	 public  static Order makeOrder(String choix,Integer sugar)
+	 
+	{	
+		 Order orderCustomer=new Order();
+		 Drink drinkCustomer = returnDrinks(choix);
+		 orderCustomer.setDrink(drinkCustomer);
+		 orderCustomer.setNumberSugar(sugar.toString());
+				if(sugar!=0)
+				{
+					orderCustomer.setStick("0");
+				}
+		 
+		 
+		
 		return orderCustomer;
+	}
+	 
+	public  static Drink returnDrinks(String choix) {
+		Drink drinkCustomer = null;
+		 if(choix.contains(COFFEE))
+		 {
+			
+			 drinkCustomer= new Coffee();
+		 }
+		 if(choix.contains(CHOCOLAT))
+		 {	
+			 drinkCustomer=new Chocolate();
+		 }
+		 if(choix.contains(TEA))
+		 {
+			 
+			 drinkCustomer=new Tea();
+		 }
+		return drinkCustomer;
 	}
 	public static Order makeOrder(String message)
 	{
@@ -78,7 +108,7 @@ public class LauncherCoffeeMachine {
 		
 	}
 	
-	public static String drinkMakerProtocol(Order order)
+	public static  String drinkMakerProtocol(Order order)
 	{
 		String message = null;
 		if(order.getMessage()!=null)
@@ -99,7 +129,9 @@ public class LauncherCoffeeMachine {
 		return message;
 	}
 	
-	public static void showCommandCustomer(String messageProtocol)
+	
+	
+	public static  void drinkMaker(String messageProtocol)
 	{
 		
 		if(messageProtocol.contains("M:"))
@@ -152,6 +184,26 @@ public class LauncherCoffeeMachine {
 			output="Drink maker makes 1 Chocolate with no sugar and therefore  no stick";
 			System.out.println(output);
 		}
+	}
+	public static Boolean amountCorrect(String choix ,Double amountInput)
+	
+	{
+		Boolean correct=false;
+		Drink drinkCustomer = returnDrinks(choix);
+		if(amountInput>drinkCustomer.getPrice()||amountInput.equals(drinkCustomer.getPrice()))
+		{
+			correct=true;
+		}
+		return correct;
+		
+		
+	}
+	
+	public static Double remainingAmount(String choix,Double amountInput)
+	{
+		Drink drinkCustomer=returnDrinks(choix);
+		return drinkCustomer.getPrice()-amountInput;
+		
 	}
 	
 	
