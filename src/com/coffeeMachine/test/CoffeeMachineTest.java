@@ -9,7 +9,10 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.coffeeMachine.Chocolate;
+import com.coffeeMachine.Coffee;
 import com.coffeeMachine.CoffeeMachine;
+import com.coffeeMachine.Orange;
 import com.coffeeMachine.Order;
 import com.coffeeMachine.Tea;
 
@@ -44,7 +47,7 @@ class CoffeeMachineTest {
 	{
 		
 		Order orderWait=new Order(new Tea(),"1","0");
-		Order orderExpect=CoffeeMachine.makeOrder("TEA", 1);
+		Order orderExpect=CoffeeMachine.makeOrder("TEA", 1,false);
 		assertTrue(orderWait.getDrink().getCodeMachine().contains(orderExpect.getDrink().getCodeMachine()));
 		assertTrue(orderWait.getNumberSugar().contains(orderExpect.getNumberSugar()));
 		assertTrue(orderWait.getStick().contains(orderExpect.getStick()));
@@ -55,7 +58,7 @@ class CoffeeMachineTest {
 	void testMakeOrder1()
 	{
 		Order orderWaitMessage=new Order("M:Bonjour le monde");
-		Order orderExpect=CoffeeMachine.makeOrder("M:Bonjour le monde");
+		Order orderExpect=CoffeeMachine.makeOrderMessage("M:Bonjour le monde");
 		assertTrue(orderWaitMessage.getMessage().contentEquals(orderExpect.getMessage()));
 	}
 	
@@ -100,12 +103,14 @@ class CoffeeMachineTest {
 	@Test
 	void testamountCorrect()
 	{
-		assertFalse(CoffeeMachine.amountCorrect("COFFEE", 0.4));
-		assertTrue(CoffeeMachine.amountCorrect("COFFEE", 0.6));
-		assertFalse(CoffeeMachine.amountCorrect("TEA", 0.2));
-		assertTrue(CoffeeMachine.amountCorrect("TEA", 0.4));
-		assertFalse(CoffeeMachine.amountCorrect("CHOCOLATE", 0.2));
-		assertTrue(CoffeeMachine.amountCorrect("CHOCOLATE", 0.5));
+		assertFalse(CoffeeMachine.checkAmountCorrect(new Coffee(), 0.4));
+		assertTrue(CoffeeMachine.checkAmountCorrect(new Coffee(), 0.6));
+		assertFalse(CoffeeMachine.checkAmountCorrect(new Tea(), 0.2));
+		assertTrue(CoffeeMachine.checkAmountCorrect(new Tea(), 0.4));
+		assertFalse(CoffeeMachine.checkAmountCorrect(new Chocolate(), 0.2));
+		assertTrue(CoffeeMachine.checkAmountCorrect(new Chocolate(), 0.5));
+		assertFalse(CoffeeMachine.checkAmountCorrect(new Orange(),0.4));
+		assertFalse(CoffeeMachine.checkAmountCorrect(new Orange(), 0.6));
 	}
 	
 	@Test
@@ -117,5 +122,17 @@ class CoffeeMachineTest {
 		assertFalse(CoffeeMachine.remainingAmount("C",0.3)==0.2);
 		assertTrue(CoffeeMachine.remainingAmount("H",0.2)==0.3);
 		assertFalse(CoffeeMachine.remainingAmount("H",0.3)==0.1);
+	}
+	
+	@Test
+	void testbuildAndShowCustomerMessage()
+	{
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void testmakeOrderJuice()
+	{
+		fail("Not yet implemented");
 	}
 }
