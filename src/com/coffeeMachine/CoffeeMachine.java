@@ -1,5 +1,6 @@
 package com.coffeeMachine;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CoffeeMachine {
@@ -13,12 +14,13 @@ public class CoffeeMachine {
 	public static String output;
 	
 	
-	public static void showMenu()
+	public static void showMenu() 
 
 	{
 		Boolean repeatMenu=true;
 		while(repeatMenu) {
 		Scanner scan=new Scanner(System.in);
+		System.out.println("**********************COFFE MACHINE************************");
 		System.out.println("Bienvennue que désirez vous boire ?");
 		System.out.println("Veuillez tapez "+COFFEE+" pour le coffee, "+TEA+" pour le tea, "+CHOCOLATE+" pour le chocolat,"+ORANGE+" pour un jus d'orange, "+MESSAGECUSTOMER+" pour  écrire un message");
 		String choix=scan.nextLine();
@@ -56,13 +58,13 @@ public class CoffeeMachine {
 		if(choix.contains(COFFEE) ||choix.contains(TEA)||choix.contains(CHOCOLATE))
 		{
 		
-			System.out.println("Veuillez tapez la quantité de sucre que vous désirez");
+			System.out.println("Veuillez tapez la quantité de sucre que vous désirez.");
 			Integer choixSucre =scan.nextInt();
 			scan.nextLine();
-			System.out.println("Désirez vous un boisson chaude");
+			System.out.println("Désirez vous une boisson chaude, tapez true ou false?");
 			Boolean extraHot=scan.nextBoolean();
 			scan.nextLine();
-			System.out.println("Veuillez entrez le montant de votre boisson. Tea :0.4euros, Coffee : 0.6euros, Chocolate: 0.5euros, Orange 0.6euros");
+			System.out.println("Veuillez entrez le montant de votre boisson. Tea :0,4euros, Coffee : 0,6euros, Chocolate: 0,5euros, Orange 0,6euros");
 			Double amountDrink = null;
 			try {
 				 amountDrink=scan.nextDouble();
@@ -267,6 +269,11 @@ public class CoffeeMachine {
 		if(messageProtocol.contains("H:2:0"))
 		{
 			output="Drink maker makes 1 Chocolate with 2 sugar and a stick";
+			
+		}
+		if(messageProtocol.contains("H::"))
+		{
+			output="Drink maker makes 1 Chocolate with no sugar and therefore  no stick";
 			
 		}
 		if(messageProtocol.contains("O::"))

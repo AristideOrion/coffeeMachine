@@ -110,18 +110,18 @@ class CoffeeMachineTest {
 		assertFalse(CoffeeMachine.checkAmountCorrect(new Chocolate(), 0.2));
 		assertTrue(CoffeeMachine.checkAmountCorrect(new Chocolate(), 0.5));
 		assertFalse(CoffeeMachine.checkAmountCorrect(new Orange(),0.4));
-		assertFalse(CoffeeMachine.checkAmountCorrect(new Orange(), 0.6));
+		assertTrue(CoffeeMachine.checkAmountCorrect(new Orange(), 0.6));
 	}
 	
 	@Test
 	void testremainingAmount()
 	{
-		assertTrue(CoffeeMachine.remainingAmount("T",0.2)==0.2);
-		assertFalse(CoffeeMachine.remainingAmount("T",0.3)==0.4);
-		assertTrue(CoffeeMachine.remainingAmount("C",0.3)==0.3);
-		assertFalse(CoffeeMachine.remainingAmount("C",0.3)==0.2);
-		assertTrue(CoffeeMachine.remainingAmount("H",0.2)==0.3);
-		assertFalse(CoffeeMachine.remainingAmount("H",0.3)==0.1);
+		assertTrue(CoffeeMachine.remainingAmount(new Tea(),0.2)==0.2);
+		assertFalse(CoffeeMachine.remainingAmount(new Tea(),0.3)==0.4);
+		assertTrue(CoffeeMachine.remainingAmount(new Coffee(),0.3)==0.2);
+		assertFalse(CoffeeMachine.remainingAmount(new Coffee(),0.3)==0.1);
+		assertTrue(CoffeeMachine.remainingAmount(new Chocolate(),0.2)==0.3);
+		assertFalse(CoffeeMachine.remainingAmount(new Chocolate(),0.4)==0.2);
 	}
 	
 	@Test
@@ -133,6 +133,8 @@ class CoffeeMachineTest {
 	@Test
 	void testmakeOrderJuice()
 	{
-		fail("Not yet implemented");
+		Order order=CoffeeMachine.makeOrderJuice("O");
+		assertTrue(order.getDrink().getCodeMachine().contains("O"));
+		assertTrue(order.getDrink().getPrice().equals(0.6));
 	}
 }
