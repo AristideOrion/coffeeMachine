@@ -6,7 +6,7 @@ public class CoffeeMachine {
 
 	
 	private static final String MESSAGECUSTOMER = "M";
-	private static final String CHOCOLAT = "H";
+	private static final String CHOCOLATE = "H";
 	private static final String TEA = "T";
 	private static final String COFFEE = "C";
 	public static String output;
@@ -21,8 +21,7 @@ public class CoffeeMachine {
 		System.out.println("Bienvennue que désirez vous boire ?");
 		System.out.println("Veuillez tapez C pour le coffee, T pour le tea, H pour le chocolate, M pour  écrire un message");
 		String choix=scan.nextLine();
-		scan.close();
-		if(!choix.contains(COFFEE) && !choix.contains(TEA) && !choix.contains(CHOCOLAT) && !choix.contains(MESSAGECUSTOMER))
+		if(!choix.contains(COFFEE) && !choix.contains(TEA) && !choix.contains(CHOCOLATE) && !choix.contains(MESSAGECUSTOMER))
 		{
 			System.out.println("Veuillez reprendre svp, l'instruction saisie ne correspond pas");
 		}
@@ -31,20 +30,35 @@ public class CoffeeMachine {
 			System.out.println("Veuillez saisir votre message");
 			Scanner scanMess=new Scanner(System.in);
 			String messageToAffiche=scanMess.nextLine();
-			scanMess.close();
 			drinkMaker(drinkMakerProtocol(makeOrder(messageToAffiche)) );
-			
+			showCommandCustomer(output);
 			
 		}
-		if(choix.contains(COFFEE) ||choix.contains(TEA)||choix.contains(CHOCOLAT))
+		if(choix.contains(COFFEE) ||choix.contains(TEA)||choix.contains(CHOCOLATE))
 		{
 			System.out.println("Veuillez tapez la quantité de sucre que vous désirez");
 			Integer choixSucre =scan.nextInt();
 			scan.nextLine();
-			System.out.println("Veuillez tapez le montant de votre boisson. Tea :0.4euros, Coffee : 0.6euros, Chocolate: 0.5euros");
-			Double amountDrink=scan.nextDouble();
+			System.out.println("Veuillez entrez le montant de votre boisson. Tea :0.4euros, Coffee : 0.6euros, Chocolate: 0.5euros");
+			Double amountDrink = null;
+			try {
+				 amountDrink=scan.nextDouble();
+			}catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+			}
 			
-			drinkMaker(drinkMakerProtocol(makeOrder(choix,choixSucre)));
+			if(!amountCorrect(choix, amountDrink))
+			{
+			Double remaining=remainingAmount(choix, amountDrink);
+			output="Il manque "+remaining+" euros au montant saisi";
+			}
+			else
+			{
+				drinkMaker(drinkMakerProtocol(makeOrder(choix,choixSucre)));
+			}
+			
+			showCommandCustomer(output);
 		}
 		
 		System.out.println("Désirez vous reprendre votre commande? si oui tapez 1 sinon tapez 2");
@@ -59,6 +73,7 @@ public class CoffeeMachine {
 		if(i!=1)
 		{
 			repeatMenu=false;
+			scan.close();
 		}
 		
 	}
@@ -89,7 +104,7 @@ public class CoffeeMachine {
 			
 			 drinkCustomer= new Coffee();
 		 }
-		 if(choix.contains(CHOCOLAT))
+		 if(choix.contains(CHOCOLATE))
 		 {	
 			 drinkCustomer=new Chocolate();
 		 }
@@ -137,7 +152,7 @@ public class CoffeeMachine {
 		if(messageProtocol.contains("M:"))
 		{
 			output=messageProtocol;
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("T:1:0"))
 		{
@@ -147,44 +162,56 @@ public class CoffeeMachine {
 		if(messageProtocol.contains("T:2:0"))
 		{
 			output="Drink maker makes 1 tea with 2 sugar and a stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("T::"))
 		{
 			output="Drink maker makes 1 tea with no sugar and therefore  no stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("C:1:0"))
 		{
 			output="Drink maker makes 1 coffee with 1 sugar and a stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("C:2:0"))
 		{
 			output="Drink maker makes 1 coffee with 2 sugar and a stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("C::"))
 		{
 			output="Drink maker makes 1 coffee with no sugar and therefore  no stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("H:1:0"))
 		{
 			output="Drink maker makes 1 Chocolate with 1 sugar and a stick";
-			System.out.println(output);
+			
 		}
 		if(messageProtocol.contains("H:2:0"))
 		{
 			output="Drink maker makes 1 Chocolate with 2 sugar and a stick";
-			System.out.println();
+			
 		}
 		if(messageProtocol.contains("H::"))
 		{
 			output="Drink maker makes 1 Chocolate with no sugar and therefore  no stick";
-			System.out.println(output);
+			
 		}
 	}
+	
+	
+	public static void showCommandCustomer(String output)
+	{
+			
+			System.out.println("*******VOTRE COMMANDE**************");
+			System.out.println("***"+ output +"****");
+			System.out.println("***********************************");
+		
+		
+	}
+	
 	public static Boolean amountCorrect(String choix ,Double amountInput)
 	
 	{

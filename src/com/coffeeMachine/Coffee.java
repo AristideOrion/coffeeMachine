@@ -1,16 +1,18 @@
 package com.coffeeMachine;
 
-public class Coffee extends Drink {
+public class Coffee extends Drink implements ExtraHot{
 
 	
-	public  Coffee()
+	private boolean hotDrink;
+	
+	public  Coffee() //NOSONAR
 	{
 		this.setPrice();
 		this.setCodeMachine();
 	}
 	@Override
 	protected void setPrice() {
-		this.price=0.6;
+		this.price=0.4;
 
 	}
 
@@ -28,6 +30,17 @@ public class Coffee extends Drink {
 	@Override
 	public String getCodeMachine() {
 		return this.codeMachine;
+	}
+	@Override
+	public boolean extraHot() {
+		// TODO Auto-generated method stub
+		return hotDrink;
+	}
+	
+	public void setDrinkHot()
+	{
+		hotDrink=true;
+		this.codeMachine=this.getCodeMachine()+"h";
 	}
 
 }

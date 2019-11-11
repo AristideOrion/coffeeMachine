@@ -111,9 +111,11 @@ class CoffeeMachineTest {
 	@Test
 	void testremainingAmount()
 	{
-		assertTrue(CoffeeMachine.remainingAmount("TEA",0.2)==0.2);
-		assertFalse(CoffeeMachine.remainingAmount("TEA",0.3)==0.4);
-		assertTrue(CoffeeMachine.remainingAmount("COFFEE",0.3)==0.3);
-		assertFalse(CoffeeMachine.remainingAmount("COFFEE",0.3)==0.2);
+		assertTrue(CoffeeMachine.remainingAmount("T",0.2)==0.2);
+		assertFalse(CoffeeMachine.remainingAmount("T",0.3)==0.4);
+		assertTrue(CoffeeMachine.remainingAmount("C",0.3)==0.3);
+		assertFalse(CoffeeMachine.remainingAmount("C",0.3)==0.2);
+		assertTrue(CoffeeMachine.remainingAmount("H",0.2)==0.3);
+		assertFalse(CoffeeMachine.remainingAmount("H",0.3)==0.1);
 	}
 }

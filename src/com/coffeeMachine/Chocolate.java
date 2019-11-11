@@ -1,7 +1,8 @@
 package com.coffeeMachine;
 
-public class Chocolate extends Drink {
+public class Chocolate extends Drink implements ExtraHot {
 	
+	private boolean hotDrink=false;
 	public Chocolate() {
 		this.setPrice();
 		this.setCodeMachine();
@@ -31,6 +32,17 @@ public class Chocolate extends Drink {
 	public String getCodeMachine() {
 		// TODO Auto-generated method stub
 		return this.codeMachine;
+	}
+
+	@Override
+	public boolean extraHot() {
+		// TODO Auto-generated method stub
+		return hotDrink;
+	}
+	public void setDrinkHot()
+	{
+		hotDrink=true;
+		this.codeMachine=this.getCodeMachine()+"h";
 	}
 
 }

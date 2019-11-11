@@ -5,6 +5,7 @@ private Drink drink;
 private String numberSugar;
 private String stick;
 private String message;
+private String codeProtocol=null;
 	
 	public Order() 
 	{
@@ -23,6 +24,12 @@ private String message;
 	this.drink = drink;
 	this.numberSugar = numberSugar;
 	this.stick = stick;
+	}
+	
+	public Order(Drink drink) 
+	{
+	super();
+	this.drink = drink;
 	}
 	
 
@@ -57,20 +64,55 @@ private String message;
 	}
 	public String getInstructionForWithSugarStickDrinkMaker()
 	{
-		return this.getDrink().toString()+":"+this.getNumberSugar()+":"+this.getStick();
+		
+		try {
+			codeProtocol=this.getDrink().getCodeMachine()+":"+this.getNumberSugar()+":"+this.getStick();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return codeProtocol;
 		
 	}
 	public String getInstructionForWithMessageForDrinkMaker()
 	{
-		return "M:"+this.message;
+		try
+		{
+			codeProtocol="M:"+this.message;
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		return codeProtocol;
 	}
 	
 	public String getInstructionForWithoutSugarDrinkMaker()
 	{
-		return this.getDrink().toString()+"::";
+		
+		try
+		{
+			codeProtocol=this.getDrink().getCodeMachine()+"::";
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return codeProtocol;
 		
 	}
 	
+	public String getInstructionForOrangeDrinkMaker()
+
+	{
+		try
+		{
+			codeProtocol=this.getDrink().getCodeMachine()+"::";
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		return codeProtocol;
+	}
 	
 	
 }
