@@ -12,7 +12,7 @@ public class Coffee extends Drink implements ExtraHot{
 	}
 	@Override
 	protected void setPrice() {
-		this.price=0.5;
+		this.price=0.6;
 
 	}
 

@@ -1,6 +1,7 @@
 package com.coffeeMachine;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CoffeeMachine {
@@ -12,6 +13,7 @@ public class CoffeeMachine {
 	private static final String COFFEE = "C";
 	private static final String ORANGE="O";
 	public static String output;
+	protected static Map<String,StateDrink> records=new HashMap<String, StateDrink>();
 	
 	
 	public static void showMenu() 
@@ -199,6 +201,7 @@ public class CoffeeMachine {
 	public static  String drinkMakerProtocol(Order order)
 	{
 		String message = null;
+		SaverDrinkSell.saveDrinkSell(records, order);
 		if(order.getMessage()!=null)
 		{
 			 message=order.getInstructionForWithMessageForDrinkMaker();
