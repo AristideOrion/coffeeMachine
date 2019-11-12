@@ -2,9 +2,9 @@ package com.coffeeMachine;
 
 public class Coffee extends Drink implements ExtraHot{
 
-	
+
 	private boolean hotDrink;
-	
+
 	public  Coffee() //NOSONAR
 	{
 		this.setPrice();
@@ -36,7 +36,7 @@ public class Coffee extends Drink implements ExtraHot{
 		// TODO Auto-generated method stub
 		return hotDrink;
 	}
-	
+
 	public void setDrinkHot()
 	{
 		hotDrink=true;

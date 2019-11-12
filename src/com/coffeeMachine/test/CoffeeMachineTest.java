@@ -27,20 +27,6 @@ class CoffeeMachineTest {
 		fail("Not yet implemented");
 	}
 	
-	/* java.lang.reflect.inaccessibleObjectException, use whiteBox. I can't find solution for now.
-	@Test
-	void testMakeOrder() throws Exception
-	{
-		
-		Order orderWait=new Order("T","1","0");
-		Order orderExpect=Whitebox.invokeMethod(CoffeeMachine.class,"makeOrder","T",1);
-		assertTrue(orderWait.getDrink().contains(orderExpect.getDrink()));
-		assertTrue(orderWait.getNumberSugar().contains(orderExpect.getNumberSugar()));
-		assertTrue(orderWait.getStick().contains(orderExpect.getStick()));
-		assertTrue(orderWait.getMessage()==null);
-	}*/
-	
-	
 	
 	@Test
 	void testMakeOrder() throws Exception
