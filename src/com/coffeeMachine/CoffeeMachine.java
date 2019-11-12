@@ -119,6 +119,7 @@ public class CoffeeMachine {
 		String messageToAffiche=scanMess.nextLine();
 		drinkMaker(drinkMakerProtocol(makeOrderMessage(messageToAffiche)) );
 		showCommandCustomer(output);
+		
 	}
 
 
@@ -346,7 +347,7 @@ public class CoffeeMachine {
 		System.out.println("*******VOTRE COMMANDE**************");
 		System.out.println("***"+ output +"****");
 		System.out.println("***********************************");
-
+		Report.readAndShowReport(records);
 
 	}
 
