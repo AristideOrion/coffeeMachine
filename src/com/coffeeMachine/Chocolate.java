@@ -11,7 +11,7 @@ public class Chocolate extends Drink implements ExtraHot {
 	@Override
 	protected void setPrice() {
 		// TODO Auto-generated method stub
-		this.price=0.5;
+		this.price=0.78
 
 	}
 
